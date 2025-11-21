@@ -1,0 +1,32 @@
+---
+- name: Deploy Docker Services Stack
+  hosts: all
+  become: yes
+  vars_files:
+    - ../group_vars/all.yml
+  
+  tasks:
+    - name: Install Docker and Docker Compose
+      include_role:
+        name: docker
+      tags: docker
+
+    - name: Setup Traefik reverse proxy
+      include_role:
+        name: traefik
+      tags: traefik
+
+    - name: Deploy Keycloak with PostgreSQL
+      include_role:
+        name: keycloak
+      tags: keycloak
+
+    - name: Deploy Forgejo
+      include_role:
+        name: forgejo
+      tags: forgejo
+
+    - name: Deploy Komodo
+      include_role:
+        name: komodo
+      tags: komodo

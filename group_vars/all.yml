@@ -1,0 +1,26 @@
+domain_name: "pim.lan"
+traefik_network: "traefik-proxy"
+
+# Configuration Docker
+docker_compose_version: "v2.24.0"
+
+# Configuration services
+services:
+  traefik:
+    subdomain: "traefik"
+    port: "8080"
+  komodo:
+    subdomain: "komodo"
+    port: "9120"
+  forgejo:
+    subdomain: "git"
+    port: "3000"
+  keycloak:
+    subdomain: "auth"
+    port: "8080"
+
+# Base de données pour Keycloak
+keycloak_db:
+  name: "keycloak"
+  user: "keycloak"
+  password: "{{ vault_keycloak_db_password }}"
